@@ -1194,7 +1194,7 @@
   <!-- App Business logic in Vanilla JS -->
   <script>
     const FACEBOOK_PAGE_ID = "YOUR_PAGE_USERNAME_OR_ID";
-    const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbz3EJHfrgNqhBA5tfTjrLqTLd29F_Y0JDgTby5uNysneo11z1-Fx1o4sNkc7PscbgdKiw/exec";
+    const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwvks0EhZ_fq3fXxi86ywq_g-8aukDq2wc7qkGhALZx6bMkpZRZY7KvQgr5fFPxygVk3w/exec";
 
     // Set Messenger ID references
     document.getElementById("confirm-messenger-link").href = `https://www.facebook.com/Fatoclean/`;
@@ -1738,6 +1738,11 @@
         }
       }
 
+      let addonListForPayload = [];
+      if (addonUpper) addonListForPayload.push("Upper (+100.000 đ)");
+      if (addonBottom) addonListForPayload.push("Bottom (+100.000-150.000 đ)");
+      const addonsFormatted = addonListForPayload.length > 0 ? addonListForPayload.join(", ") : "No";
+
       confirmedOrderData = {
         id: orderId,
         customerName,
@@ -1748,6 +1753,7 @@
         quantity: selectedQuantity,
         addonUpper,
         addonBottom,
+        addons: addonsFormatted,
         specialNotes,
         totalPrice: totalAmountText,
         shoeImage: base64Image,
@@ -1761,6 +1767,9 @@
         customerPhone,
         shoesName,
         serviceTitle: translations[currentLang][currentService.titleKey],
+        addons: addonsFormatted,
+        addonOxidation: addonsFormatted,
+        addonList: addonListForPayload,
         addonUpper,
         addonBottom,
         priceFormatted: isContact ? 0 : currentService.price,
